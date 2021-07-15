@@ -1,10 +1,9 @@
 ﻿import pygame
 from game import Game
 
-# start game
 def main():
-    game = Game()
-    game.game_loop()
+    game = Game()       # create game
+    game.game_loop()    # start game loop
     
 if __name__ == "__main__":
     main()

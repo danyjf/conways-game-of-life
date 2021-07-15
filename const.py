@@ -1,5 +1,6 @@
 ﻿import pygame
 
+"""Constants to use on the game"""
 WHITE = (255, 255, 255)
 GREY = (190, 190, 190)
 BLACK = (0, 0, 0)
