@@ -8,20 +8,35 @@ class Grid:
         self.width = width
         self.height = height
         self.grid = self.initialize_grid()
+        self.alive = []
         
     def initialize_grid(self):
-        grid = [[]]
+        grid = []
         for y in range(0, self.height, CELL_SIZE):
+            grid.append([])
             for x in range(0, self.width, CELL_SIZE):
                 grid[y // CELL_SIZE].append(Cell(x, y))
-            grid.append([])
+            
+        # set neighbours of each cell
+        for row in grid:
+            for cell in row:
+                cell.set_neighbours(grid)
         
         return grid
     
     def set_alive(self, idx_x, idx_y):
         cell = self.grid[idx_y][idx_x]
-        cell.is_alive = True
-        cell.draw()
+        if cell not in self.alive:
+            cell.is_alive = True
+            cell.draw()
+            self.alive.append(cell)
+        
+    def set_dead(self, idx_x, idx_y):
+        cell = self.grid[idx_y][idx_x]
+        if cell in self.alive:
+            cell.is_alive = False
+            cell.draw()
+            self.alive.remove(cell)
 
     def draw(self):
         for y in range(0, self.height, CELL_SIZE):
